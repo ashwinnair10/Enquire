@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "759084936586",
+    "project_id": "enquire-fdc88",
+    "storage_bucket": "enquire-fdc88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759084936586:android:681ace61b0923d2f5d6c73",
+        "android_client_info": {
+          "package_name": "com.example.enquire"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA849iBNdLBjOqhHtcVEMOvVX1qMhVQLfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
