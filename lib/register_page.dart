@@ -49,11 +49,11 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 28, 28, 28),
+          backgroundColor: Color.fromARGB(255, 24, 12, 27),
           title: Text(
             'Register',
             style: TextStyle(
-              color: Color.fromARGB(255, 255, 238, 214),
+              color: Color.fromARGB(255, 253, 246, 255),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -63,12 +63,12 @@ class _RegisterPageState extends State<RegisterPage> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Color.fromARGB(255, 255, 238, 214),
+              color: Color.fromARGB(255, 255, 149, 100),
             ),
           ),
           elevation: 0,
         ),
-        backgroundColor: Color.fromARGB(255, 28, 28, 28),
+        backgroundColor: Color.fromARGB(255, 24, 12, 27),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Center(
@@ -95,15 +95,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(),
                           hintText: "Name",
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           labelText: 'Name',
                           labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 253, 228, 195),
+                              color: Color.fromARGB(255, 253, 246, 255),
                               width: 1,
                             ),
                           ),
@@ -130,15 +130,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(),
                           hintText: "School",
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           labelText: 'School',
                           labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 253, 228, 195),
+                              color: Color.fromARGB(255, 253, 246, 255),
                               width: 1,
                             ),
                           ),
@@ -165,15 +165,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(),
                           hintText: "Email",
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           labelText: 'Email',
                           labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 253, 228, 195),
+                              color: Color.fromARGB(255, 253, 246, 255),
                               width: 1,
                             ),
                           ),
@@ -201,15 +201,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(),
                           hintText: "Password",
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           labelText: 'Password',
                           labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 253, 228, 195),
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 253, 228, 195),
+                              color: Color.fromARGB(255, 253, 246, 255),
                               width: 1,
                             ),
                           ),
@@ -225,7 +225,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(height: 32.0),
                       _isProcessing
                           ? CircularProgressIndicator(
-                              color: Color.fromARGB(255, 253, 228, 195),
+                              color: Color.fromARGB(255, 253, 246, 255),
                               strokeWidth: 5,
                             )
                           : Row(
@@ -234,7 +234,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor:
-                                          Color.fromARGB(255, 253, 228, 195),
+                                          Color.fromARGB(255, 255, 149, 100),
                                     ),
                                     onPressed: () async {
                                       setState(() {
@@ -271,7 +271,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     child: Text(
                                       'Register',
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 19, 31, 41),
+                                        color:
+                                            Color.fromARGB(255, 253, 246, 255),
                                       ),
                                     ),
                                   ),

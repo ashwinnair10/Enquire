@@ -32,13 +32,13 @@ class _LoginPageState extends State<LoginPage> {
           title: Text(
             "Login Failed",
             style: TextStyle(
-              color: Color.fromARGB(255, 28, 28, 28),
+              color: Color.fromARGB(255, 24, 12, 27),
             ),
           ),
           content: Text(
             "Invalid email or password.",
             style: TextStyle(
-              color: Color.fromARGB(255, 28, 28, 28),
+              color: Color.fromARGB(255, 24, 12, 27),
             ),
           ),
           actions: [
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color.fromARGB(255, 28, 28, 28),
+          backgroundColor: Color.fromARGB(255, 24, 12, 27),
           body: FutureBuilder(
             future: _initializeFirebase(),
             builder: (context, snapshot) {
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Color.fromARGB(
-                                              255, 253, 246, 255),
+                                              255, 255, 149, 100),
                                         ),
                                         onPressed: () async {
                                           _focusEmail.unfocus();
@@ -232,8 +232,8 @@ class _LoginPageState extends State<LoginPage> {
                                         child: Text(
                                           'Sign In',
                                           style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 28, 28, 28),
+                                            color: Color.fromARGB(
+                                                255, 253, 246, 255),
                                           ),
                                         ),
                                       ),
@@ -266,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                                               'Register',
                                               style: TextStyle(
                                                 color: Color.fromARGB(
-                                                    255, 253, 246, 255),
+                                                    255, 255, 149, 100),
                                               ),
                                             ),
                                           ),
