@@ -127,19 +127,17 @@ Widget buildquizlist(BuildContext context) {
                       ),
                       Spacer(),
                       if (score != -1)
-                        {
-                          Text(
-                            '$score / $total',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 253, 246, 255),
-                            ),
+                        Text(
+                          '$score / $total',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 253, 246, 255),
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                        } as Widget,
+                        ),
+                      SizedBox(
+                        width: 5,
+                      ),
                     ],
                   ),
                 ),

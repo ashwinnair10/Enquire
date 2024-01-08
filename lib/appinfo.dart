@@ -15,11 +15,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 28, 28, 28),
+          backgroundColor: Color.fromARGB(255, 24, 12, 27),
           title: Text(
             'Info',
             style: TextStyle(
-                color: Color.fromARGB(255, 255, 238, 214),
+                color: Color.fromARGB(255, 253, 246, 255),
                 fontWeight: FontWeight.w500),
           ),
           leading: IconButton(
@@ -34,11 +34,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Color.fromARGB(255, 255, 238, 214),
+              color: Color.fromARGB(255, 255, 149, 100),
             ),
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 28, 28, 28),
+        backgroundColor: Color.fromARGB(255, 24, 12, 27),
       ),
     );
   }

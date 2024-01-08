@@ -87,16 +87,24 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 24.0),
-                        child: Text(
-                          'ENQUIRE',
-                          style: TextStyle(
-                            fontSize: 70,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 253, 228, 195),
-                          ),
+                      CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 253, 246, 255),
+                        backgroundImage: AssetImage('assets/ic_launcher.jpg'),
+                        radius: 70,
+                      ),
+                      /*SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Enquire',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 253, 246, 255),
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
                         ),
+                      ),*/
+                      SizedBox(
+                        height: 30,
                       ),
                       Form(
                         key: _formKey,
@@ -114,15 +122,15 @@ class _LoginPageState extends State<LoginPage> {
                                 border: OutlineInputBorder(),
                                 hintText: "Email",
                                 hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 228, 195),
+                                  color: Color.fromARGB(255, 253, 246, 255),
                                 ),
                                 labelText: 'Email',
                                 labelStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 228, 195),
+                                  color: Color.fromARGB(255, 253, 246, 255),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 253, 228, 195),
+                                    color: Color.fromARGB(255, 253, 246, 255),
                                     width: 1,
                                   ),
                                 ),
@@ -148,20 +156,20 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                 hintText: "Password",
                                 hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 228, 195),
+                                  color: Color.fromARGB(255, 253, 246, 255),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 253, 228, 195),
+                                    color: Color.fromARGB(255, 253, 246, 255),
                                   ),
                                 ),
                                 labelText: 'Password',
                                 labelStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 228, 195),
+                                  color: Color.fromARGB(255, 253, 246, 255),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 253, 228, 195),
+                                    color: Color.fromARGB(255, 253, 246, 255),
                                     width: 1,
                                   ),
                                 ),
@@ -177,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(height: 24.0),
                             _isProcessing
                                 ? CircularProgressIndicator(
-                                    color: Color.fromARGB(255, 253, 228, 195),
+                                    color: Color.fromARGB(255, 253, 246, 255),
                                     strokeWidth: 5,
                                   )
                                 : Column(
@@ -187,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Color.fromARGB(
-                                              255, 255, 238, 214),
+                                              255, 253, 246, 255),
                                         ),
                                         onPressed: () async {
                                           _focusEmail.unfocus();
@@ -232,36 +240,37 @@ class _LoginPageState extends State<LoginPage> {
                                       SizedBox(
                                         height: 50,
                                       ),
-                                      Text(
-                                        'New User?',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 255, 238, 214),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color.fromARGB(
-                                              255, 255, 238, 214),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterPage(),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'New User?',
+                                            style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 253, 246, 255),
                                             ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'Register',
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 28, 28, 28),
                                           ),
-                                        ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RegisterPage(),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              'Register',
+                                              style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 253, 246, 255),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   )
@@ -274,7 +283,7 @@ class _LoginPageState extends State<LoginPage> {
               }
               return Center(
                 child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 253, 228, 195),
+                  color: Color.fromARGB(255, 253, 246, 255),
                   strokeWidth: 5,
                 ),
               );
