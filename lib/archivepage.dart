@@ -64,17 +64,16 @@ class _ArchivePageState extends State<ArchivePage> {
           final data = snapshot.requireData;
 
           return Container(
-            width: MediaQuery.of(context).size.width - 40,
+            //width: MediaQuery.of(context).size.width - 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            height: 350,
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(15),
             child: ListView.builder(
               itemCount: data.size,
               itemBuilder: (context, index) {
                 return buildqa(context, data.docs[index]['question'],
-                    data.docs[index]['answer']);
+                    data.docs[index]['answer'], data.docs[index]['img']);
               },
             ),
           );
