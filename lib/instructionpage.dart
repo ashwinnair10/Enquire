@@ -50,6 +50,8 @@ class _InstructionPageState extends State<InstructionPage> {
         .set({
       'name': user?.displayName,
       'completed': true,
+      'score': -1,
+      'total': -1,
     });
   }
 
