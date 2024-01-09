@@ -96,17 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundImage: AssetImage('assets/ic_launcher.jpg'),
                           radius: 70,
                         ),
-                        /*SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Enquire',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 253, 246, 255),
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),*/
                         SizedBox(
                           height: 30,
                         ),
