@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enquire/archivepage.dart';
 import 'package:flutter/material.dart';
 
-Widget buildarchivebox(BuildContext context, String title, url, q1, q2, q3, q4,
-    q5, a1, a2, a3, a4, a5) {
+Widget buildarchivebox(
+    BuildContext context, QueryDocumentSnapshot<Object?> data) {
+  CollectionReference<Object?> questions =
+      data.reference.collection('questions');
   return Container(
     height: 200,
     width: 170,
@@ -20,7 +23,7 @@ Widget buildarchivebox(BuildContext context, String title, url, q1, q2, q3, q4,
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image(
-            image: NetworkImage(url),
+            image: NetworkImage(data['url']),
             height: 165,
             width: 165,
             fit: BoxFit.cover,
@@ -32,23 +35,14 @@ Widget buildarchivebox(BuildContext context, String title, url, q1, q2, q3, q4,
               context,
               MaterialPageRoute(
                 builder: (context) => ArchivePage(
-                  title: title,
-                  q1: q1,
-                  q2: q2,
-                  q3: q3,
-                  q4: q4,
-                  q5: q5,
-                  a1: a1,
-                  a2: a2,
-                  a3: a3,
-                  a4: a4,
-                  a5: a5,
+                  title: data['title'],
+                  questions: questions.snapshots(),
                 ),
               ),
             ),
           },
           child: Text(
-            title,
+            data['title'],
             style: TextStyle(
               height: 1,
               fontWeight: FontWeight.w600,

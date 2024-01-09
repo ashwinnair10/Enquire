@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 202, 240, 248),
+          backgroundColor: Color.fromARGB(255, 253, 246, 255),
           title: Text(
             "Login Failed",
             style: TextStyle(
@@ -84,15 +84,19 @@ class _LoginPageState extends State<LoginPage> {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Container(
                   padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 253, 246, 255),
-                        backgroundImage: AssetImage('assets/ic_launcher.jpg'),
-                        radius: 70,
-                      ),
-                      /*SizedBox(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 200,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Color.fromARGB(255, 253, 246, 255),
+                          backgroundImage: AssetImage('assets/ic_launcher.jpg'),
+                          radius: 70,
+                        ),
+                        /*SizedBox(
                         height: 10,
                       ),
                       Text(
@@ -103,181 +107,194 @@ class _LoginPageState extends State<LoginPage> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),*/
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: <Widget>[
-                            TextFormField(
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                              controller: _emailTextController,
-                              focusNode: _focusEmail,
-                              validator: (value) =>
-                                  Validator.validateEmail(email: value),
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: "Email",
-                                hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 246, 255),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
                                 ),
-                                labelText: 'Email',
-                                labelStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 246, 255),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 253, 246, 255),
-                                    width: 1,
-                                  ),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            TextFormField(
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                              controller: _passwordTextController,
-                              focusNode: _focusPassword,
-                              obscureText: true,
-                              validator: (value) =>
-                                  Validator.validatePassword(password: value),
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 246, 255),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                controller: _emailTextController,
+                                focusNode: _focusEmail,
+                                validator: (value) =>
+                                    Validator.validateEmail(email: value),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "Email",
+                                  hintStyle: TextStyle(
                                     color: Color.fromARGB(255, 253, 246, 255),
                                   ),
-                                ),
-                                labelText: 'Password',
-                                labelStyle: TextStyle(
-                                  color: Color.fromARGB(255, 253, 246, 255),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  labelText: 'Email',
+                                  labelStyle: TextStyle(
                                     color: Color.fromARGB(255, 253, 246, 255),
-                                    width: 1,
                                   ),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                    width: 2,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 253, 246, 255),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.red,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 24.0),
-                            _isProcessing
-                                ? CircularProgressIndicator(
+                              SizedBox(height: 10),
+                              TextFormField(
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
+                                controller: _passwordTextController,
+                                focusNode: _focusPassword,
+                                obscureText: true,
+                                validator: (value) =>
+                                    Validator.validatePassword(password: value),
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle: TextStyle(
                                     color: Color.fromARGB(255, 253, 246, 255),
-                                    strokeWidth: 5,
-                                  )
-                                : Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color.fromARGB(
-                                              255, 255, 149, 100),
-                                        ),
-                                        onPressed: () async {
-                                          _focusEmail.unfocus();
-                                          _focusPassword.unfocus();
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            setState(() {
-                                              _isProcessing = true;
-                                            });
-                                            User? user = await FireAuth
-                                                .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomePage(),
-                                                ),
-                                              );
-                                            } else {
-                                              _showErrorDialog(
-                                                  'Invalid credentials');
-                                            }
-                                          }
-                                        },
-                                        child: Text(
-                                          'Sign In',
-                                          style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 253, 246, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 253, 246, 255),
+                                    ),
+                                  ),
+                                  labelText: 'Password',
+                                  labelStyle: TextStyle(
+                                    color: Color.fromARGB(255, 253, 246, 255),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 253, 246, 255),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 24.0),
+                              _isProcessing
+                                  ? CircularProgressIndicator(
+                                      color: Color.fromARGB(255, 253, 246, 255),
+                                      strokeWidth: 5,
+                                    )
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color.fromARGB(
+                                                255, 255, 149, 100),
                                           ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 50,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'New User?',
+                                          onPressed: () async {
+                                            _focusEmail.unfocus();
+                                            _focusPassword.unfocus();
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                _isProcessing = true;
+                                              });
+                                              User? user = await FireAuth
+                                                  .signInUsingEmailPassword(
+                                                email:
+                                                    _emailTextController.text,
+                                                password:
+                                                    _passwordTextController
+                                                        .text,
+                                              );
+                                              setState(() {
+                                                _isProcessing = false;
+                                              });
+
+                                              if (user != null) {
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomePage(),
+                                                  ),
+                                                );
+                                              } else {
+                                                _showErrorDialog(
+                                                    'Invalid credentials');
+                                              }
+                                            }
+                                          },
+                                          child: Text(
+                                            'Sign In',
                                             style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 253, 246, 255),
                                             ),
                                           ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      RegisterPage(),
-                                                ),
-                                              );
-                                            },
-                                            child: Text(
-                                              'Register',
+                                        ),
+                                        SizedBox(
+                                          height: 50,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'New User?',
                                               style: TextStyle(
                                                 color: Color.fromARGB(
-                                                    255, 255, 149, 100),
+                                                    255, 253, 246, 255),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                          ],
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                'Register',
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 255, 149, 100),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                            ],
+                          ),
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Text(
+                          'Project by Ashwin A Nair',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Color.fromARGB(255, 253, 246, 255),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }

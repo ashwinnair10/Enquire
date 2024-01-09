@@ -178,7 +178,7 @@ class _ResultState extends State<Result> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  backgroundColor: Color.fromARGB(255, 253, 246, 255),
+                  backgroundColor: Color.fromARGB(255, 255, 149, 100),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -191,7 +191,7 @@ class _ResultState extends State<Result> {
                 child: Text(
                   'Go to Dashboard',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 48, 42, 24),
+                    color: Color.fromARGB(255, 253, 246, 255),
                   ),
                 ),
               ),
