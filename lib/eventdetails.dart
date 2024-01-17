@@ -79,7 +79,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         child: Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 213, 193),
+            color: Color.fromARGB(255, 253, 246, 255),
             borderRadius: BorderRadius.circular(20),
           ),
           child: SingleChildScrollView(
