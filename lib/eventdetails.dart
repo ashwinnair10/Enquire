@@ -160,7 +160,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                     )),
                 if (hasAttemptedQuiz == null)
                   CircularProgressIndicator(
-                    color: Color.fromARGB(255, 253, 228, 195),
+                    color: Color.fromARGB(255, 72, 0, 87),
                   )
                 else if (widget.quiz &&
                     hasAttemptedQuiz != true &&
