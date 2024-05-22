@@ -92,6 +92,6 @@ Widget buildhomepage(BuildContext context) {
         ],
       ),
     ),
-    bottomNavigationBar: buildbottombar(context),
+    //bottomNavigationBar: buildbottombar(context),
   );
 }

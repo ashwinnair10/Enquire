@@ -28,6 +28,7 @@ Widget buildeventbox(BuildContext context, String id, img, title, details,
       padding: EdgeInsets.all(0),
     ),
     child: Container(
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 253, 246, 255),
         borderRadius: BorderRadius.circular(15),
@@ -36,9 +37,9 @@ Widget buildeventbox(BuildContext context, String id, img, title, details,
       width: MediaQuery.of(context).size.width - 20,
       child: Row(
         children: [
-          SizedBox(
-            width: 5,
-          ),
+          // SizedBox(
+          //   width: 5,
+          // ),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image(

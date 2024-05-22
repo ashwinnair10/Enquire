@@ -54,7 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
   var date = FirebaseAuth.instance.currentUser!.metadata.creationTime!;
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
-
+  var url = FirebaseAuth.instance.currentUser!.photoURL;
   @override
   void initState() {
     _currentUser = user as User;
@@ -213,7 +213,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   Spacer(),
                   CircleAvatar(
                     backgroundColor: Color.fromARGB(255, 253, 246, 255),
-                    backgroundImage: AssetImage('assets/ic_launcher.jpg'),
+                    backgroundImage:
+                        NetworkImage(_currentUser.photoURL as String),
                     radius: 50,
                   ),
                 ],

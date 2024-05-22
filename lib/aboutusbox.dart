@@ -43,7 +43,7 @@ Widget buildaboutusbox(BuildContext context, String title, url) {
   }
 
   return Container(
-    padding: EdgeInsets.all(10),
+    padding: EdgeInsets.all(5),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
       color: Color.fromARGB(255, 253, 246, 255),

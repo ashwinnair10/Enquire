@@ -9,24 +9,26 @@ Widget buildarchivebox(
   CollectionReference<Object?> questions =
       data.reference.collection('questions');
   return Container(
-    height: 200,
-    width: 170,
+    // height: 200,
+    // width: 170,
+    padding: EdgeInsets.all(5),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
       color: Color.fromARGB(255, 253, 246, 255),
     ),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          height: 5,
-        ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image(
-            image: NetworkImage(data['url']),
-            height: 165,
-            width: 165,
-            fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Image(
+              image: NetworkImage(data['url']),
+              // height: 165,
+              // width: 165,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         TextButton(
@@ -51,7 +53,7 @@ Widget buildarchivebox(
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.center,
           ),
         )
       ],
