@@ -43,24 +43,24 @@ Widget buildaboutusbox(BuildContext context, String title, url) {
   }
 
   return Container(
-    height: 230,
-    width: 180,
+    padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
       color: Color.fromARGB(255, 253, 246, 255),
     ),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          height: 5,
-        ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image(
-            image: NetworkImage(url),
-            height: 170,
-            width: 170,
-            fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Image(
+              image: NetworkImage(url),
+              // height: 170,
+              // // width: 170,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         TextButton(

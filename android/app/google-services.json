@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "759084936586",
+    "firebase_url": "https://enquire-fdc88-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "enquire-fdc88",
     "storage_bucket": "enquire-fdc88.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.enquire"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "759084936586-cj51kk2cg7ksj4d3ope5ga4qjbnttmv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA849iBNdLBjOqhHtcVEMOvVX1qMhVQLfg"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759084936586-cj51kk2cg7ksj4d3ope5ga4qjbnttmv9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

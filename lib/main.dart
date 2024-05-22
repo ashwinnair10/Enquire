@@ -1,26 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:enquire/login_page.dart';
+import 'package:enquire/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/services.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    MaterialApp(
-      theme: ThemeData(fontFamily: 'Oswald'),
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-    ),
-  );
+
+  runApp(MyApp());
 }
 
 class DefaultFirebaseOptions {
@@ -52,8 +50,39 @@ class DefaultFirebaseOptions {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 253, 246, 255),
+                strokeWidth: 5,
+              ),
+            ),
+          );
+        } else if (snapshot.hasData && snapshot.data != null) {
+          return HomePage();
+        } else {
+          return LoginPage();
+        }
+      },
+    );
   }
 }

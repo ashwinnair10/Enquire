@@ -1,26 +1,19 @@
-// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, library_private_types_in_public_api
-//import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enquire/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import './register_page.dart';
+import './home.dart';
 import './fire_auth.dart';
-import './validator.dart';
+import './register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
   bool _isProcessing = false;
 
   void _showErrorDialog(String message) {
@@ -36,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           content: Text(
-            "Invalid email or password.",
+            message,
             style: TextStyle(
               color: Color.fromARGB(255, 24, 12, 27),
             ),
@@ -54,253 +47,189 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
+  Future<void> _initializeFirebase(BuildContext context) async {
+    await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
+
     if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      bool userExists = await checkIfUserExists(user.email!);
+
+      if (userExists) {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => RegisterPage(user: user),
+            ),
+          );
+        }
+      }
     }
-    return firebaseApp;
+  }
+
+  Future<bool> checkIfUserExists(String email) async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('users').doc(email).get();
+      return snapshot.exists;
+    } catch (e) {
+      print('Error checking user existence: $e');
+      return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _focusEmail.unfocus();
-        _focusPassword.unfocus();
+        FocusScope.of(context).unfocus();
       },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: Color.fromARGB(255, 24, 12, 27),
-          body: FutureBuilder(
-            future: _initializeFirebase(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 200,
-                        ),
-                        CircleAvatar(
-                          backgroundColor: Color.fromARGB(255, 253, 246, 255),
-                          backgroundImage: AssetImage('assets/ic_launcher.jpg'),
-                          radius: 70,
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                                controller: _emailTextController,
-                                focusNode: _focusEmail,
-                                validator: (value) =>
-                                    Validator.validateEmail(email: value),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: "Email",
-                                  hintStyle: TextStyle(
-                                    color: Color.fromARGB(255, 253, 246, 255),
-                                  ),
-                                  labelText: 'Email',
-                                  labelStyle: TextStyle(
-                                    color: Color.fromARGB(255, 253, 246, 255),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 253, 246, 255),
-                                      width: 1,
-                                    ),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
-                                      width: 2,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              TextFormField(
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                                controller: _passwordTextController,
-                                focusNode: _focusPassword,
-                                obscureText: true,
-                                validator: (value) =>
-                                    Validator.validatePassword(password: value),
-                                decoration: InputDecoration(
-                                  hintText: "Password",
-                                  hintStyle: TextStyle(
-                                    color: Color.fromARGB(255, 253, 246, 255),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 253, 246, 255),
-                                    ),
-                                  ),
-                                  labelText: 'Password',
-                                  labelStyle: TextStyle(
-                                    color: Color.fromARGB(255, 253, 246, 255),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 253, 246, 255),
-                                      width: 1,
-                                    ),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 24.0),
-                              _isProcessing
-                                  ? CircularProgressIndicator(
-                                      color: Color.fromARGB(255, 253, 246, 255),
-                                      strokeWidth: 5,
-                                    )
-                                  : Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color.fromARGB(
-                                                255, 255, 149, 100),
-                                          ),
-                                          onPressed: () async {
-                                            _focusEmail.unfocus();
-                                            _focusPassword.unfocus();
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              setState(() {
-                                                _isProcessing = true;
-                                              });
-                                              User? user = await FireAuth
-                                                  .signInUsingEmailPassword(
-                                                email:
-                                                    _emailTextController.text,
-                                                password:
-                                                    _passwordTextController
-                                                        .text,
-                                              );
-                                              setState(() {
-                                                _isProcessing = false;
-                                              });
-
-                                              if (user != null) {
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomePage(),
-                                                  ),
-                                                );
-                                              } else {
-                                                _showErrorDialog(
-                                                    'Invalid credentials');
-                                              }
-                                            }
-                                          },
-                                          child: Text(
-                                            'Sign In',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 253, 246, 255),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'New User?',
-                                              style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 253, 246, 255),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        RegisterPage(),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                'Register',
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 255, 149, 100),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 100,
-                        ),
-                        Text(
-                          'Project by Ashwin A Nair',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Color.fromARGB(255, 253, 246, 255),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 24, 12, 27),
+        body: FutureBuilder(
+          future: _initializeFirebase(context),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(
                   color: Color.fromARGB(255, 253, 246, 255),
                   strokeWidth: 5,
                 ),
               );
-            },
-          ),
+            } else if (snapshot.hasError) {
+              // Handle error
+              return Center(
+                child: Text('Error initializing Firebase'),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 253, 246, 255),
+                      backgroundImage: AssetImage('assets/ic_launcher.jpg'),
+                      radius: 70,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'EnQuire',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromARGB(255, 255, 149, 100),
+                        fontSize: 35,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    _isProcessing
+                        ? CircularProgressIndicator(
+                            color: Color.fromARGB(255, 253, 246, 255),
+                            strokeWidth: 5,
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.fromLTRB(75, 0, 75, 0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor:
+                                    Color.fromARGB(255, 255, 255, 255),
+                              ),
+                              onPressed: () async {
+                                setState(() {
+                                  _isProcessing = true;
+                                });
+
+                                User? user = await FireAuth.signInWithGoogle();
+
+                                if (mounted) {
+                                  setState(() {
+                                    _isProcessing = false;
+                                  });
+
+                                  if (user != null && user.email != null) {
+                                    bool userExists =
+                                        await checkIfUserExists(user.email!);
+
+                                    if (userExists) {
+                                      if (mounted) {
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) => HomePage(),
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      if (mounted) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterPage(user: user),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  } else {
+                                    print('User or user email is null');
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Error'),
+                                          content: Text(
+                                              'User or user email is null. Please try again.'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text('OK'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                }
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: Image.network(
+                                        'https://archive.org/download/github.com-google-flutter-desktop-embedding_-_2019-01-02_05-44-41/cover.jpg'),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Sign In with Google',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                    SizedBox(height: 100),
+                  ],
+                ),
+              );
+            }
+          },
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(LoginPage());
 }

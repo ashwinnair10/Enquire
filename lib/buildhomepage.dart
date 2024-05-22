@@ -85,13 +85,13 @@ Widget buildhomepage(BuildContext context) {
               ),
               buildimageslider(context),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
-              buildbottombar(context),
             ],
           ),
         ],
       ),
     ),
+    bottomNavigationBar: buildbottombar(context),
   );
 }

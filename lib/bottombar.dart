@@ -7,6 +7,7 @@ Widget buildbottombar(BuildContext context) {
   return Container(
     color: Color.fromARGB(101, 0, 0, 0),
     width: MediaQuery.of(context).size.width,
+    height: 120,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

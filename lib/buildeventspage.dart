@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enquire/eventbox.dart';
+import 'package:enquire/shimmereventbox.dart';
 import 'package:flutter/material.dart';
 
 final Stream<QuerySnapshot> event =
@@ -22,10 +23,18 @@ Widget buildeventspage(BuildContext context) {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
+          return ListView.builder(
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ShimmerEventBox(),
+                ],
+              );
+            },
           );
         }
 

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously, unused_field
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously, unused_field, deprecated_member_use
 //import 'package:enquire/calendar.dart';
 import 'package:enquire/appinfo.dart';
 import 'package:enquire/calendar.dart';
@@ -6,6 +6,7 @@ import 'package:enquire/dashboard.dart';
 import 'package:enquire/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import './buildhomepage.dart';
 import './buildaboutuspage.dart';
 import './buildeventspage.dart';
@@ -17,13 +18,10 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(useMaterial3: true),
-        home: HomePage1(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true),
+      home: HomePage1(),
     );
   }
 }
@@ -37,6 +35,7 @@ class HomePage1 extends StatefulWidget {
 class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
   late final TabController _tabController;
   bool _isSigningOut = false;
+
   @override
   void initState() {
     super.initState();
@@ -145,16 +144,19 @@ class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
                       },
                     );
                     await FirebaseAuth.instance.signOut();
-                    setState(
-                      () {
-                        _isSigningOut = false;
-                      },
-                    );
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ),
-                    );
+                    await GoogleSignIn().signOut();
+                    if (mounted) {
+                      setState(
+                        () {
+                          _isSigningOut = false;
+                        },
+                      );
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    }
                   },
                   value: 3,
                   child: Row(
@@ -183,6 +185,8 @@ class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
           ],
           backgroundColor: Color.fromARGB(255, 24, 12, 27),
           bottom: TabBar(
+            splashFactory: NoSplash.splashFactory,
+            dividerColor: Colors.transparent,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 8,
             indicatorColor: Color.fromARGB(255, 255, 149, 100),
@@ -216,7 +220,7 @@ class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.groups),
-                    Text('About Us'),
+                    Text('The Team'),
                   ],
                 ),
               ),
