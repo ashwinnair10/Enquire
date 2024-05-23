@@ -178,6 +178,8 @@ class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
                   ),
                 ),
               ],
+              icon: Icon(Icons.more_vert),
+              iconColor: Color.fromARGB(255, 253, 246, 255),
               offset: Offset(0, 50),
               color: Color.fromARGB(255, 253, 246, 255),
               elevation: 2,

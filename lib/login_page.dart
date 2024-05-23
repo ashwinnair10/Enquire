@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         : Container(
                             width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(75, 0, 75, 0),
+                            padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -185,8 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: Text('Error'),
-                                          content: Text(
-                                              'User or user email is null. Please try again.'),
+                                          content:
+                                              Text('Google Sign-In Failed'),
                                           actions: <Widget>[
                                             TextButton(
                                               child: Text('OK'),
@@ -201,24 +201,26 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 }
                               },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: Image.network(
-                                        'https://archive.org/download/github.com-google-flutter-desktop-embedding_-_2019-01-02_05-44-41/cover.jpg'),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    'Sign In with Google',
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
+                              child: SizedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: Image.network(
+                                          'https://archive.org/download/github.com-google-flutter-desktop-embedding_-_2019-01-02_05-44-41/cover.jpg'),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 10),
+                                    Text(
+                                      'Sign In with Google',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
