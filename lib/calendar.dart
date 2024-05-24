@@ -95,7 +95,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 28, 28, 28),
+        backgroundColor: Color.fromARGB(255, 24, 12, 27),
         title: Text(
           'Event Calendar',
           style: TextStyle(
@@ -110,7 +110,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 28, 28, 28),
+      backgroundColor: Color.fromARGB(255, 24, 12, 27),
       body: EventCalendar(
         showEvents: true,
         calendarType: CalendarType.GREGORIAN,
@@ -140,9 +140,9 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
         eventOptions: EventOptions(
           emptyIcon: Icons.error,
-          emptyIconColor: Color.fromARGB(255, 28, 28, 28),
+          emptyIconColor: Color.fromARGB(255, 24, 12, 27),
           emptyText: 'No Event Found',
-          emptyTextColor: Color.fromARGB(255, 28, 28, 28),
+          emptyTextColor: Color.fromARGB(255, 24, 12, 27),
           loadingWidget: () {
             return CircularProgressIndicator(
               strokeWidth: 5,

@@ -88,7 +88,7 @@ class _QuizPageState extends State<QuizPage> {
       }
     }
 
-    Navigator.pushAndRemoveUntil(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => Result(
@@ -100,7 +100,6 @@ class _QuizPageState extends State<QuizPage> {
           _userAnswers,
         ),
       ),
-      (Route<dynamic> route) => route.settings.name == 'EventDetailsPage',
     );
   }
 

@@ -44,16 +44,13 @@ Widget buildquizlist(BuildContext context) {
     ) {
       if (snapshot.hasData == false) {
         print(snapshot);
-        return Text(
-          'NIL',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        );
+        return SizedBox();
       }
       if (snapshot.hasError) {
         return Center(
-          child: Text('ERROR'),
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
         );
       }
       if (snapshot.connectionState == ConnectionState.waiting) {
