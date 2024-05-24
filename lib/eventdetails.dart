@@ -87,6 +87,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget buildEventDetails(BuildContext context) {
+    _checkQuizCompletedStatus();
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
