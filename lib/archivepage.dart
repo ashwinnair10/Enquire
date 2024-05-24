@@ -2,6 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enquire/archiveqa.dart';
+import 'package:enquire/shimmerarchivebox.dart';
+import 'package:enquire/shimmerarchiveqa.dart';
 import 'package:flutter/material.dart';
 
 class ArchivePage extends StatefulWidget {
@@ -40,23 +42,47 @@ class _ArchivePageState extends State<ArchivePage> {
           AsyncSnapshot<QuerySnapshot> snapshot,
         ) {
           if (snapshot.hasData == false) {
-            print(snapshot);
-            return Text(
-              'NIL',
-              style: TextStyle(
-                color: Colors.white,
+            return Container(
+              //width: MediaQuery.of(context).size.width - 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.all(15),
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return buildshimmerqa(context, "Loading", "Loading", "");
+                },
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(
-              child: Text('ERROR'),
+            return Container(
+              //width: MediaQuery.of(context).size.width - 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.all(15),
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return buildshimmerqa(context, "Loading", "Loading", "");
+                },
+              ),
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
+            return Container(
+              //width: MediaQuery.of(context).size.width - 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.all(15),
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return buildshimmerqa(context, "Loading", "Loading", "");
+                },
               ),
             );
           }
