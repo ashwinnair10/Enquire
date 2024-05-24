@@ -49,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
           .collection('event')
           .doc(widget.id)
           .collection('quiz_completed')
-          .doc(user.displayName)
+          .doc(user.email)
           .get();
       setState(() {
         _quizCompleted =
@@ -88,7 +88,7 @@ class _QuizPageState extends State<QuizPage> {
       }
     }
 
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (context) => Result(
@@ -100,6 +100,7 @@ class _QuizPageState extends State<QuizPage> {
           _userAnswers,
         ),
       ),
+      (Route<dynamic> route) => route.settings.name == 'EventDetailsPage',
     );
   }
 
@@ -158,8 +159,8 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => true,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 24, 12, 27),
         body: Padding(

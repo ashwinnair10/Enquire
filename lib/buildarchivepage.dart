@@ -20,7 +20,7 @@ Widget buildarchivepage(BuildContext context) {
               mainAxisSpacing: 20,
               childAspectRatio: 0.75,
             ),
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(10),
             itemCount: 4,
             itemBuilder: (context, index) {
               return buildShimmerArchiveBox();
@@ -46,7 +46,7 @@ Widget buildarchivepage(BuildContext context) {
                     mainAxisSpacing: 20, childAspectRatio: 0.75,
                     // mainAxisExtent: MediaQuery.of(context).size.width / 2 + 20,
                   ),
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(10),
                   itemCount: 4,
                   itemBuilder: (context, index) {
                     return buildShimmerArchiveBox();
@@ -62,7 +62,7 @@ Widget buildarchivepage(BuildContext context) {
                   mainAxisSpacing: 20, childAspectRatio: 0.75,
                   //mainAxisExtent: MediaQuery.of(context).size.width / 2 + 20,
                 ),
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 itemCount: data.size,
                 itemBuilder: (
                   context,

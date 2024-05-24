@@ -66,7 +66,7 @@ class _ResultState extends State<Result> {
           .collection('event')
           .doc(widget.id)
           .collection('quiz_completed')
-          .doc(user?.displayName)
+          .doc(user?.email)
           .set({
         'name': user?.displayName,
         'completed': true,
@@ -82,15 +82,56 @@ class _ResultState extends State<Result> {
   Widget build(BuildContext context) {
     _handleCompletion();
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 24, 12, 27),
+        actions: [
+          // IconButton(
+          //   onPressed: () => {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => DashboardPage(),
+          //       ),
+          //     ),
+          //   },
+          //   icon: Icon(
+          //     Icons.arrow_forward,
+          //     color: Color.fromARGB(255, 255, 149, 100),
+          //   ),
+          // ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              backgroundColor: Color.fromARGB(255, 24, 12, 27),
+            ),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DashboardPage(),
+                ),
+                (Route<dynamic> route) =>
+                    route.settings.name == 'EventDetailsPage',
+              );
+            },
+            child: Text(
+              'Go to Dashboard',
+              style: TextStyle(
+                color: Color.fromARGB(255, 253, 246, 255),
+              ),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: Color.fromARGB(255, 24, 12, 27),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 75,
-            ),
             Text(
               'Quiz Results',
               style: TextStyle(
@@ -150,7 +191,7 @@ class _ResultState extends State<Result> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             Text(
               '*( Winners will be notified via email )',
@@ -165,31 +206,6 @@ class _ResultState extends State<Result> {
                     blurRadius: 50,
                   ),
                 ],
-              ),
-            ),
-            SizedBox(
-              height: 80,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                backgroundColor: Color.fromARGB(255, 255, 149, 100),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DashboardPage(),
-                  ),
-                );
-              },
-              child: Text(
-                'Go to Dashboard',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 253, 246, 255),
-                ),
               ),
             ),
           ],

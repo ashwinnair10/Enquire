@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -104,14 +106,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               );
             } else if (snapshot.hasError) {
-              // Handle error
               return Center(
-                child: Text('Error initializing Firebase'),
+                child: CircularProgressIndicator(),
               );
             } else {
-              return Center(
+              return SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(30, 150, 30, 100),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 253, 246, 255),
@@ -135,7 +138,6 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         : Container(
                             width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -201,30 +203,35 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 }
                               },
-                              child: SizedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: Image.network(
-                                          'https://archive.org/download/github.com-google-flutter-desktop-embedding_-_2019-01-02_05-44-41/cover.jpg'),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: Image.network(
+                                        'https://archive.org/download/github.com-google-flutter-desktop-embedding_-_2019-01-02_05-44-41/cover.jpg'),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Sign In with Google',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
                                     ),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      'Sign In with Google',
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                    SizedBox(height: 100),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Divider(
+                      color: Color.fromARGB(255, 24, 12, 27),
+                    ),
+                    //SizedBox(height: 200),
+                    //Text('Project by Ashwin A Nair'),
                   ],
                 ),
               );

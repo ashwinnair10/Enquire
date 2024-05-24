@@ -51,7 +51,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
           .collection('event')
           .doc(widget.id)
           .collection('quiz_completed')
-          .doc(user.displayName)
+          .doc(user.email)
           .get();
       if (mounted) {
         setState(() {
