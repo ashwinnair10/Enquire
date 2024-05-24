@@ -121,16 +121,13 @@ class _QuizState extends State<Quiz> {
                     height: 40,
                   ),
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 36, 36, 36),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
                         Text(
                           widget.questions[widget.questionIndex]['question']
                               .toString(),
@@ -139,9 +136,6 @@ class _QuizState extends State<Quiz> {
                               color: Color.fromARGB(255, 253, 246, 255),
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 30,
                         ),
                       ],
                     ),

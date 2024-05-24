@@ -83,120 +83,116 @@ class _ResultState extends State<Result> {
     _handleCompletion();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 24, 12, 27),
-      body: WillPopScope(
-        onWillPop: () async => false,
-        child: Container(
-          padding: EdgeInsets.all(20),
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 75,
-              ),
-              Text(
-                'Quiz Results',
-                style: TextStyle(
-                  fontSize: 40,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black,
-                      blurRadius: 50,
-                    ),
-                  ],
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 253, 246, 255),
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Icon(
-                Icons.emoji_events,
-                color: Color.fromARGB(255, 255, 149, 100),
-                size: 120,
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Text(
-                'Your score is currently being reviewed by our team',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Color.fromARGB(255, 253, 246, 255),
-                  fontWeight: FontWeight.w500,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black,
-                      blurRadius: 50,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Scores will be visible in the dashboard soon! Results* will be published on our social media handles',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Color.fromARGB(255, 253, 246, 255),
-                  fontWeight: FontWeight.w300,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black,
-                      blurRadius: 50,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              Text(
-                '*( Winners will be notified via email )',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color.fromARGB(255, 253, 246, 255),
-                  fontWeight: FontWeight.w300,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black,
-                      blurRadius: 50,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 80,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 75,
+            ),
+            Text(
+              'Quiz Results',
+              style: TextStyle(
+                fontSize: 40,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 50,
                   ),
-                  backgroundColor: Color.fromARGB(255, 255, 149, 100),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DashboardPage(),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Go to Dashboard',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 253, 246, 255),
+                ],
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 253, 246, 255),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Icon(
+              Icons.emoji_events,
+              color: Color.fromARGB(255, 255, 149, 100),
+              size: 120,
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Your score is currently being reviewed by our team',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                color: Color.fromARGB(255, 253, 246, 255),
+                fontWeight: FontWeight.w500,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 50,
                   ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Scores will be visible in the dashboard soon! Results* will be published on our social media handles',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 17,
+                color: Color.fromARGB(255, 253, 246, 255),
+                fontWeight: FontWeight.w300,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 50,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Text(
+              '*( Winners will be notified via email )',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                color: Color.fromARGB(255, 253, 246, 255),
+                fontWeight: FontWeight.w300,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 50,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 80,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Color.fromARGB(255, 255, 149, 100),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashboardPage(),
+                  ),
+                );
+              },
+              child: Text(
+                'Go to Dashboard',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 253, 246, 255),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
