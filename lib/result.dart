@@ -31,22 +31,22 @@ class _ResultState extends State<Result> {
     if (call == 0) {
       print('check 1');
       User? user = FirebaseAuth.instance.currentUser;
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-          .instance
-          .collection('users')
-          .doc(user?.email)
-          .get();
-      print('check 2');
+      // DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+      //     .instance
+      //     .collection('users')
+      //     .doc(user?.email)
+      //     .get();
+      // print('check 2');
 
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user?.email)
-          .set({
-        'name': user?.displayName,
-        'email': user?.email,
-        'school': snapshot.data()?['school'],
-        'quiz': (snapshot.data()?['quiz'] + 1)
-      });
+      // await FirebaseFirestore.instance
+      //     .collection('users')
+      //     .doc(user?.email)
+      //     .set({
+      //   'name': user?.displayName,
+      //   'email': user?.email,
+      //   'school': snapshot.data()?['school'],
+      //   'quiz': (snapshot.data()?['quiz'] + 1)
+      // });
 
       print('check3');
       await FirebaseFirestore.instance

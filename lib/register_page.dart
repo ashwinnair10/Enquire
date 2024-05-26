@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_field
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enquire/login_page.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
       'school': school,
       'quiz': 0,
     });
+    print('User saved: ${widget.user.email}');
   }
 
   @override

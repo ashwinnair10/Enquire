@@ -138,13 +138,15 @@ class _HomePage1State extends State<HomePage1> with TickerProviderStateMixin {
                 ),
                 PopupMenuItem(
                   onTap: () async {
-                    setState(
-                      () {
-                        _isSigningOut = true;
-                      },
-                    );
-                    await FirebaseAuth.instance.signOut();
-                    await GoogleSignIn().signOut();
+                    if (mounted) {
+                      setState(
+                        () {
+                          _isSigningOut = true;
+                        },
+                      );
+                      await FirebaseAuth.instance.signOut();
+                      await GoogleSignIn().signOut();
+                    }
                     if (mounted) {
                       setState(
                         () {

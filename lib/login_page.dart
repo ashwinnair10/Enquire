@@ -1,5 +1,3 @@
-// ignore_for_file: unused_element
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,7 +7,7 @@ import './fire_auth.dart';
 import './register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -49,37 +47,51 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> _initializeFirebase(BuildContext context) async {
-    await Firebase.initializeApp();
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      bool userExists = await checkIfUserExists(user.email!);
-
-      if (userExists) {
-        if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => HomePage(),
-            ),
-          );
-        }
-      } else {
-        if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => RegisterPage(user: user),
-            ),
-          );
-        }
-      }
-    }
+  @override
+  void initState() {
+    super.initState();
+    //_initializeFirebase();
   }
+
+  // Future<void> _initializeFirebase() async {
+  //   print('Initializing Firebase...');
+  //   await Firebase.initializeApp();
+  //   User? user = FirebaseAuth.instance.currentUser;
+
+  //   if (user != null) {
+  //     print('User is not null, checking if user exists');
+  //     bool userExists = await checkIfUserExists(user.email!);
+  //     print('User exists in init: $userExists');
+
+  //     if (userExists) {
+  //       print('Navigating to HomePage');
+  //       if (mounted) {
+  //         Navigator.of(context).pushReplacement(
+  //           MaterialPageRoute(
+  //             builder: (context) => HomePage(),
+  //           ),
+  //         );
+  //       }
+  //     } else {
+  //       print('Navigating to RegisterPage');
+  //       if (mounted) {
+  //         Navigator.of(context).pushReplacement(
+  //           MaterialPageRoute(
+  //             builder: (context) => RegisterPage(user: user),
+  //           ),
+  //         );
+  //       }
+  //     }
+  //   } else {
+  //     print('No user currently signed in.');
+  //   }
+  // }
 
   Future<bool> checkIfUserExists(String email) async {
     try {
       final snapshot =
           await FirebaseFirestore.instance.collection('users').doc(email).get();
+      print('Document exists: ${snapshot.exists}');
       return snapshot.exists;
     } catch (e) {
       print('Error checking user existence: $e');
@@ -96,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 24, 12, 27),
         body: FutureBuilder(
-          future: _initializeFirebase(context),
+          future:
+              Firebase.initializeApp(), // Initialize Firebase in FutureBuilder
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -107,9 +120,10 @@ class _LoginPageState extends State<LoginPage> {
               );
             } else if (snapshot.hasError) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: Text('Error initializing Firebase'),
               );
             } else {
+              // _initializeFirebase(); // Ensure Firebase is initialized before continuing
               return SingleChildScrollView(
                 padding: EdgeInsets.fromLTRB(30, 150, 30, 100),
                 child: Column(
@@ -151,28 +165,33 @@ class _LoginPageState extends State<LoginPage> {
                                   _isProcessing = true;
                                 });
 
-                                User? user = await FireAuth.signInWithGoogle();
-
-                                if (mounted) {
-                                  setState(() {
-                                    _isProcessing = false;
-                                  });
+                                try {
+                                  User? user =
+                                      await FireAuth.signInWithGoogle();
 
                                   if (user != null && user.email != null) {
                                     bool userExists =
                                         await checkIfUserExists(user.email!);
+                                    print(
+                                        'here User exists after sign-in: $userExists');
 
-                                    if (userExists) {
-                                      if (mounted) {
+                                    if (mounted) {
+                                      setState(() {
+                                        _isProcessing = false;
+                                      });
+
+                                      if (userExists) {
+                                        print(
+                                            'Navigating to HomePage after sign-in');
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (context) => HomePage(),
                                           ),
                                         );
-                                      }
-                                    } else {
-                                      if (mounted) {
-                                        Navigator.of(context).push(
+                                      } else {
+                                        print(
+                                            'Navigating to RegisterPage after sign-in');
+                                        Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 RegisterPage(user: user),
@@ -182,25 +201,17 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                   } else {
                                     print('User or user email is null');
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Error'),
-                                          content:
-                                              Text('Google Sign-In Failed'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('OK'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                    setState(() {
+                                      _isProcessing = false;
+                                    });
+                                    _showErrorDialog('Google Sign-In Failed');
                                   }
+                                } catch (e) {
+                                  print('Google Sign-In failed: $e');
+                                  setState(() {
+                                    _isProcessing = false;
+                                  });
+                                  _showErrorDialog('Google Sign-In failed: $e');
                                 }
                               },
                               child: Row(
@@ -230,8 +241,6 @@ class _LoginPageState extends State<LoginPage> {
                     Divider(
                       color: Color.fromARGB(255, 24, 12, 27),
                     ),
-                    //SizedBox(height: 200),
-                    //Text('Project by Ashwin A Nair'),
                   ],
                 ),
               );

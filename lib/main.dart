@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enquire/login_page.dart';
 import 'package:enquire/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
+  const AuthWrapper({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,19 +71,56 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
+            backgroundColor: Color.fromARGB(255, 24, 12, 27),
             body: Center(
               child: CircularProgressIndicator(
-                color: Color.fromARGB(255, 253, 246, 255),
+                color: Color.fromARGB(255, 255, 255, 255),
                 strokeWidth: 5,
               ),
             ),
           );
         } else if (snapshot.hasData && snapshot.data != null) {
-          return HomePage();
+          return FutureBuilder<bool>(
+            future: checkIfUserExists(snapshot.data!.email!),
+            builder: (context, userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return Scaffold(
+                  backgroundColor: Color.fromARGB(255, 24, 12, 27),
+                  body: Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      strokeWidth: 5,
+                    ),
+                  ),
+                );
+              } else if (userSnapshot.hasError) {
+                return Scaffold(
+                  body: Center(
+                    child: Text('Error: ${userSnapshot.error}'),
+                  ),
+                );
+              } else if (userSnapshot.data == true) {
+                return HomePage();
+              } else {
+                return LoginPage();
+              }
+            },
+          );
         } else {
           return LoginPage();
         }
       },
     );
+  }
+
+  Future<bool> checkIfUserExists(String email) async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('users').doc(email).get();
+      return snapshot.exists;
+    } catch (e) {
+      print('Error checking user existence: $e');
+      return false;
+    }
   }
 }

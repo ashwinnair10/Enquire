@@ -53,6 +53,19 @@ class _InstructionPageState extends State<InstructionPage> {
       'score': -1,
       'total': -1,
     });
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .doc(user?.email)
+        .get();
+    await FirebaseFirestore.instance.collection('users').doc(user?.email).set({
+      'name': user?.displayName,
+      'email': user?.email,
+      'school': snapshot.data()?['school'],
+      'quiz': (snapshot.data()?['quiz'] + 1)
+    });
+    print('quiz : ${snapshot.data()?['quiz']}');
+    print('quiz : ${snapshot.data()?['quiz']}');
   }
 
   @override
