@@ -4,7 +4,6 @@ const admin = require('firebase-admin');
 const app = express();
 const port = 3000;
 
-// Replace with the path to your service account key file
 const serviceAccount = require('C:/flutterapps/enquire/quizvalidator/enquire-fdc88-firebase-adminsdk-je4it-3ada0db987.json');
 
 admin.initializeApp({
@@ -16,7 +15,6 @@ const db = admin.firestore();
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// Serve the index.html file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -76,13 +74,12 @@ app.post('/get-answers', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-// Handle POST requests to add a new event
-// Handle POST requests to add a new event
+
 app.post('/add-event', async (req, res) => {
   const { title, date, time, details, img, instruct, quiz, questions } = req.body;
 
   try {
-    // Add the event to the Firestore database
+    
     const eventRef = await db.collection('event').add({
       title,
       date: new Date(date),
@@ -96,7 +93,6 @@ app.post('/add-event', async (req, res) => {
 
     const eventId = eventRef.id;
 
-    // Add questions to the event if it is a quiz
     if (quiz && questions && questions.length > 0) {
       const questionsPromises = questions.map(q => 
         db.collection('event').doc(eventId).collection('questions').add(q)
@@ -104,10 +100,9 @@ app.post('/add-event', async (req, res) => {
       await Promise.all(questionsPromises);
     }
 
-    // Send a success response
     res.json({ message: 'Event added successfully' });
   } catch (error) {
-    // Handle errors
+
     console.error('Error adding event:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
@@ -138,10 +133,9 @@ app.post('/validate-answers', async (req, res) => {
       }
     }
 
-    // Update score in the event document
+
     await userDoc.update({ score });
 
-    // Update score in the user's document
     const userQuizDoc = db.collection('users').doc(userEmail).collection('quizzes').doc(userQuizDocId);
     await userQuizDoc.update({ score });
 
