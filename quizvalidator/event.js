@@ -53,7 +53,7 @@ document.getElementById('eventForm').addEventListener('submit', async (event) =>
         document.getElementById('result').innerText = 'Event added successfully';
     } catch (error) {
        
-        console.error('Error adding event:', error);
+        console.error('event js error:', error);
         document.getElementById('result').innerText = 'Error adding event';
     }
 });

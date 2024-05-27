@@ -11,7 +11,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
+module.exports = { db };
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
@@ -88,7 +88,6 @@ app.post('/add-event', async (req, res) => {
       img,
       instruct,
       quiz,
-      questions
     });
 
     const eventId = eventRef.id;
@@ -103,7 +102,7 @@ app.post('/add-event', async (req, res) => {
     res.json({ message: 'Event added successfully' });
   } catch (error) {
 
-    console.error('Error adding event:', error);
+    console.error('index js error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
