@@ -20,4 +20,4 @@ Enquire Quiz App is a quiz application built for Enquire Quiz Club, NIT Calicut.
 
 - **Personalized Dashboard:** The app provides users with personalized dashboards, offering insights into their quiz attempt history and scores.
 
-
+- **Admin-side Features:** Administrators have access to additional functionalities such as correcting answers submitted by users attempting quizzes and managing events.
