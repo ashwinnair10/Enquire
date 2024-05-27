@@ -50,42 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    //_initializeFirebase();
   }
-
-  // Future<void> _initializeFirebase() async {
-  //   print('Initializing Firebase...');
-  //   await Firebase.initializeApp();
-  //   User? user = FirebaseAuth.instance.currentUser;
-
-  //   if (user != null) {
-  //     print('User is not null, checking if user exists');
-  //     bool userExists = await checkIfUserExists(user.email!);
-  //     print('User exists in init: $userExists');
-
-  //     if (userExists) {
-  //       print('Navigating to HomePage');
-  //       if (mounted) {
-  //         Navigator.of(context).pushReplacement(
-  //           MaterialPageRoute(
-  //             builder: (context) => HomePage(),
-  //           ),
-  //         );
-  //       }
-  //     } else {
-  //       print('Navigating to RegisterPage');
-  //       if (mounted) {
-  //         Navigator.of(context).pushReplacement(
-  //           MaterialPageRoute(
-  //             builder: (context) => RegisterPage(user: user),
-  //           ),
-  //         );
-  //       }
-  //     }
-  //   } else {
-  //     print('No user currently signed in.');
-  //   }
-  // }
 
   Future<bool> checkIfUserExists(String email) async {
     try {
@@ -108,8 +73,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 24, 12, 27),
         body: FutureBuilder(
-          future:
-              Firebase.initializeApp(), // Initialize Firebase in FutureBuilder
+          future: Firebase.initializeApp(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -123,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Error initializing Firebase'),
               );
             } else {
-              // _initializeFirebase(); // Ensure Firebase is initialized before continuing
               return SingleChildScrollView(
                 padding: EdgeInsets.fromLTRB(30, 150, 30, 100),
                 child: Column(
