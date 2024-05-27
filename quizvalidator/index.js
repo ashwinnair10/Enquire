@@ -15,6 +15,7 @@ const db = admin.firestore();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+
 // Serve the index.html file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -75,6 +76,43 @@ app.post('/get-answers', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+// Handle POST requests to add a new event
+// Handle POST requests to add a new event
+app.post('/add-event', async (req, res) => {
+  const { title, date, time, details, img, instruct, quiz, questions } = req.body;
+
+  try {
+    // Add the event to the Firestore database
+    const eventRef = await db.collection('event').add({
+      title,
+      date: new Date(date),
+      time,
+      details,
+      img,
+      instruct,
+      quiz,
+      questions
+    });
+
+    const eventId = eventRef.id;
+
+    // Add questions to the event if it is a quiz
+    if (quiz && questions && questions.length > 0) {
+      const questionsPromises = questions.map(q => 
+        db.collection('event').doc(eventId).collection('questions').add(q)
+      );
+      await Promise.all(questionsPromises);
+    }
+
+    // Send a success response
+    res.json({ message: 'Event added successfully' });
+  } catch (error) {
+    // Handle errors
+    console.error('Error adding event:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 
 app.post('/validate-answers', async (req, res) => {
   const { eventId, userEmail, correctAnswers } = req.body;
