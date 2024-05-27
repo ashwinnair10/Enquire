@@ -104,5 +104,5 @@ document.getElementById('submitScores').addEventListener('click', async () => {
     document.getElementById('result').innerText = result;
 });
 
-// Fetch events on page load
+
 fetchEvents();
