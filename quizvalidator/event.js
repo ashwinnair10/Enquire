@@ -37,7 +37,6 @@ document.getElementById('eventForm').addEventListener('submit', async (event) =>
     });
 
     try {
-    db
         const eventRef = await db.collection('event').add({
             title,
             date: new Date(date),
