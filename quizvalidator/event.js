@@ -47,8 +47,6 @@ document.getElementById('eventForm').addEventListener('submit', async (event) =>
             quiz,
             questions
         });
-
-       
         document.getElementById('result').innerText = 'Event added successfully';
     } catch (error) {
        
