@@ -1,6 +1,6 @@
 # Enquire Quiz App
 
-Enquire Quiz App is a quiz application built for Enquire Quiz Club, NIT Calicut. It features a Flutter-based frontend for the app side, Firebase backend, and Node.js for admin functionalities.
+Enquire Quiz App is a quiz application built for Enquire Quiz Club, NIT Calicut. It features a Flutter-based frontend for the app side, Firebase backend, and Node.js for admin functionalities
 
 ## Features
 
