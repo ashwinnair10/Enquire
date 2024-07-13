@@ -3,7 +3,6 @@
 import 'package:enquire/aboutusbox.dart';
 import 'package:enquire/bottombar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 Widget buildaboutuspage(BuildContext context) {
   return Scaffold(
