@@ -10,7 +10,7 @@ Widget buildarchivepage(BuildContext context) {
   return Scaffold(
     backgroundColor: Color.fromARGB(255, 24, 12, 27),
     body: FutureBuilder(
-      future: Future.delayed(Duration(seconds: 2)),
+      future: Future.delayed(Duration(seconds: 0)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return GridView.builder(

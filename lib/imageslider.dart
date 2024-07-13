@@ -8,7 +8,7 @@ final Stream<QuerySnapshot> img =
 
 Widget buildimageslider(BuildContext context) {
   return FutureBuilder(
-    future: Future.delayed(Duration(seconds: 2)),
+    future: Future.delayed(Duration(seconds: 0)),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return buildShimmerImageSlider(context);
