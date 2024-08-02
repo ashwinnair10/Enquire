@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 const app = express();
 const port = 3000;
 
-const serviceAccount = require('C:/flutterapps/enquire/quizvalidator/enquire-fdc88-firebase-adminsdk-je4it-3ada0db987.json');
+const serviceAccount = require('./enquire-fdc88-firebase-adminsdk-je4it-3ada0db987.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
